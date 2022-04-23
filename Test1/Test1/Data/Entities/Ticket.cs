@@ -24,7 +24,11 @@ namespace Test1.Data.Entities
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? Date { get; set; }
+
+        [Display(Name = "Entrada (Norte, Sur, Occidente, Oriente)")]
         public Entrance? Entrance { get; set; }
+
+
 
     }
 }

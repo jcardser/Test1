@@ -37,7 +37,8 @@ namespace Test1.Controllers
                 return NotFound();
             }
 
-            var ticket = await _context.Tickets
+            Ticket ticket = await _context.Tickets
+                .Include(e => e.Entrance)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ticket == null)
             {
@@ -56,7 +57,9 @@ namespace Test1.Controllers
                 return NotFound();
             }
 
-            var ticket = await _context.Tickets.FindAsync(id);
+            Ticket ticket = await _context.Tickets
+                .Include(e => e.Entrance)
+                .FirstOrDefaultAsync(m=>m.Id==id);
             if (ticket == null)
             {
                 return NotFound();
@@ -82,6 +85,7 @@ namespace Test1.Controllers
                 {
                     _context.Update(ticket);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
