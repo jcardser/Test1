@@ -30,7 +30,8 @@ namespace Test1.Data
                         Document = "",
                         Name = "",
                         Date = null,
-                        Entrance = null
+                        Entrance = null,
+
                     });
                 }
                 await _context.SaveChangesAsync();

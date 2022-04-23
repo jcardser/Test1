@@ -13,7 +13,7 @@ builder.Services.AddDbContext<DataContext>(o =>
 });
 
 builder.Services.AddTransient<SeedDb>();
-
+builder.Services.AddScoped<ICombosHelper, CombosHelper>();
 
 var app = builder.Build();
 

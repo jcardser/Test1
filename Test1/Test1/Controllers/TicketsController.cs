@@ -15,18 +15,19 @@ namespace Test1.Controllers
     public class TicketsController : Controller
     {
         private readonly DataContext _context;
+        private readonly ICombosHelper _combosHelper;
 
-
-        public TicketsController(DataContext context)
+        public TicketsController(DataContext context, ICombosHelper combosHelper)
         {
             _context = context;
-
+            _combosHelper = combosHelper;
         }
 
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tickets.ToListAsync());
+            return View(await _context.Tickets
+                .ToListAsync());
         }
 
         // GET: Tickets/Details/5
@@ -38,7 +39,6 @@ namespace Test1.Controllers
             }
 
             Ticket ticket = await _context.Tickets
-                .Include(e => e.Entrance)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ticket == null)
             {
@@ -58,7 +58,6 @@ namespace Test1.Controllers
             }
 
             Ticket ticket = await _context.Tickets
-                .Include(e => e.Entrance)
                 .FirstOrDefaultAsync(m=>m.Id==id);
             if (ticket == null)
             {
@@ -72,7 +71,7 @@ namespace Test1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,WasUsed,Document,Name,Date")] Ticket ticket)
+        public async Task<IActionResult> Edit(int id, Ticket ticket)
         {
             if (id != ticket.Id)
             {

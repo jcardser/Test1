@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Test1.Data.Entities
+namespace Test1.Models
 {
-    public class Ticket
+    public class AddUserViewModel
     {
-        [Display(Name = "Id Ticket")]
-        public int Id { get; set; }
-
         [Display(Name = "¿Ticket usado?")]
         public bool WasUsed { get; set; }
 
@@ -25,9 +21,5 @@ namespace Test1.Data.Entities
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? Date { get; set; }
-
-        [Display(Name = "Entrada (Norte, Sur, Occidente, Oriente)")]
-        public Entrance? Entrance { get; set; }
-
     }
 }
